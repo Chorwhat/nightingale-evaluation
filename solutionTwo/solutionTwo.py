@@ -1,18 +1,10 @@
 import sqlite3
+from helper_functions.create_cities_table import create_table
+from helper_functions.populate_cities_table import populate_cities_table
 
-
-with open('queries/create_cities.sql', 'r') as sql_file:
-    create_cities = sql_file.read()
-
-
-#create the table in data.db
-def create_table():
-    conn = sqlite3.connect('../data.db')
-    cur = conn.cursor()
-    cur.execute(create_cities)
-    conn.commit()
-    conn.close()
-
+# Create a new table within the SQLite database.
 create_table()
+# Import data from cities.csv into the newly created table.
+populate_cities_table('cities.csv')
 
-print("Cities successfully created")
+print("Cities successfully created and populated")
